@@ -2,7 +2,7 @@ import db from "../config/config.js";
 
 async function export_id() {
     return new Promise((resolve, reject) => {
-        db.query("SELECT export_id FROM requests", (err, results) => {
+        db.query("SELECT export_id FROM requests ORDER BY id", (err, results) => {
             if (err) {
                 reject(err);
             } else {
@@ -40,16 +40,18 @@ export const loadNewSpreadsheets = async (data, result) => {
                             spreadsheets_id: results.insertId,
                         }
 
+
                         const export_ids = await export_id()
 
                         if (!export_ids.includes(values[1])) {
+                            console.log(query)
                             db.query("INSERT INTO requests SET ?", [query], (err, results) => {
                                 if (err) {
                                     result(err, null);
                                 }
                             });
                         } else {
-                            db.query("UPDATE requests SET ? WHERE export_id = ?", [query, query.export_id], (err, results) => {
+                            db.query("UPDATE requests SET ? WHERE export_id = ?", [query, values[1]], (err, results) => {
                                 if (err) {
                                     result(err, null);
                                 }

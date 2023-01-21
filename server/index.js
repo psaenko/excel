@@ -18,7 +18,7 @@ dotenv.config()
 
 const app = express()
 
-if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
+if (process.env.MODE === 'development') app.use(morgan('dev'))
 
 app.use(express.json())
 
@@ -26,7 +26,7 @@ const __dirname = path.resolve()
 
 const corsOptions = {
     credentials: true,
-    origin: ['http://localhost:8080', 'https://subdomain.dniprorada.gov.ua/api'],
+    origin: ['http://localhost', 'http://localhost:443'],
     methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH', 'OPTIONS']
 }
 
@@ -39,23 +39,14 @@ app.use('/api/requests/', requestsRouter)
 app.use('/api/comments/', commentsRouter)
 app.use('/api/status/', statusRouter)
 
-if (process.env.NODE_ENV === 'production') {
-    // Step 1:
-    app.use(express.static(path.resolve(__dirname, './client')))
-    // Step 2:
-    app.get('*', function (request, response) {
-        response.sendFile(path.resolve(__dirname, './client', 'index.html'))
-    })
-}
-
 app.use(notFound)
 app.use(errorHandler)
 
-const PORT = process.env.PORT || 50000
+const PORT = process.env.SERVER_PORT || 50000
 
 app.listen(
     PORT,
     console.log(
-        `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+        `Server running in ${process.env.MODE} mode on port ${PORT}`.yellow.bold
     )
 )

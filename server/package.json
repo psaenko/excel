@@ -2,13 +2,13 @@
   "name": "excel_analytics",
   "version": "1.0.0",
   "description": "",
-  "main": "server/index.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "server": "nodemon server/index.js",
-    "client-build": "cd client && npm run build",
-    "start": "cd server && rpm run start",
-    "dev": "concurrently \"npm run server\" \"cd client && npm run serve\""
+    "server": "../node_modules/.bin/nodemon server/index.js",
+    "client-build": "cd ../client && npm run build",
+    "start": "node index.js",
+    "dev": "../node_modules/.bin/concurrently \\\"npm run server\\\" \\\"cd client && npm run serve\\\""
   },
   "keywords": [],
   "author": "",

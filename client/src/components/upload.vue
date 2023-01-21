@@ -43,7 +43,7 @@ export default {
   },
   data: function () {
     return {
-      server: `http://localhost:50000/api/upload`,
+      server: `http://localhost:3000/api/upload`,
       myFiles: [],
     };
   },

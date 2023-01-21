@@ -1,9 +1,56 @@
-version: '3.2'
+version: '3.3'
 
 services:
-  web-app:
+  client:
     build: ./client
     restart: always
+    depends_on:
+      - server
     ports:
-    - '80:80'
-    - '443:443'
+    - 80:80
+    - 443:443
+
+  server:
+    build: ./server
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    environment:
+      MYSQL_DATABASE: excel_analytics
+      MYSQL_USERNAME: pavel
+      MYSQL_PASSWORD: 31072003
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      SERVER_PORT: 3000
+    volumes:
+    - uploads:/var/lib/excel_analitics-server/uploads
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: excel_analytics
+      MYSQL_USER: pavel
+      MYSQL_PASSWORD: 31072003
+      MYSQL_ROOT_PASSWORD: admin
+      MODE: production
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    volumes:
+      - my-db:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 3001:80
+    environment:
+      - PMA_ARBITRARY=1
+
+volumes:
+  my-db:
+  uploads:
