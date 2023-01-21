@@ -1,0 +1,9 @@
+version: '3.2'
+
+services:
+  web-app:
+    build: ./client
+    restart: always
+    ports:
+    - '80:80'
+    - '443:443'
