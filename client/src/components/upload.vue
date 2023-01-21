@@ -43,7 +43,7 @@ export default {
   },
   data: function () {
     return {
-      server: `https://psaenko.com.ua:3000/api/upload`,
+      server: `http://195.189.227.131:3000/api/upload`,
       myFiles: [],
     };
   },
