@@ -26,7 +26,7 @@ const __dirname = path.resolve()
 
 const corsOptions = {
     credentials: true,
-    origin: ['http://localhost', 'https://localhost', 'https://psaenko.com.ua', 'http://psaenko.com.ua/'],
+    origin: ['http://localhost', 'https://localhost', 'https://psaenko.com.ua', 'httpZ://psaenko.com.ua/'],
     methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH', 'OPTIONS']
 }
 

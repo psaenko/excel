@@ -101,13 +101,13 @@ export default {
   methods: {
     async loadNew() {
       this.isLoading = true
-      await axios.get(`http://localhost:3000/api/requests`).then(({data}) => {
+      await axios.get(`https://psaenko.com.ua:3000/api/requests`).then(({data}) => {
         this.data = data
       })
       setTimeout(() => this.isLoading = false, 2000)
     },
     async changeComment(id) {
-      await axios.patch(`http://localhost:3000/api/comments`, {
+      await axios.patch(`https://psaenko.com.ua:3000/api/comments`, {
         id: id,
         data: event.target.value
       }).then(() => {
@@ -115,7 +115,7 @@ export default {
       })
     },
     async changeStatus(id) {
-      await axios.patch(`http://localhost:3000/api/status`, {
+      await axios.patch(`https://psaenko.com.ua:3000/api/status`, {
         id: id,
         data: event.target.value
       }).then(() => {
